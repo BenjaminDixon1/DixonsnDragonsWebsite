@@ -9,44 +9,60 @@ function toggleRole(role0, role1) {
    const role0 = document.getElementById("role0");
 const role1 = document.getElementById("role1");
 
-
 role1.value = 'target';
 
 
-
-
-
-
-let strengthValue0 = document.getElementById('strengthValue0').value;
-let agilityValue0 = document.getElementById('agilityValue0').value;
-let combatTrainingValue0 = document.getElementById('combatTrainingValue0').value;
-let charismaValue0 = document.getElementById('charismaValue0').value;
-let perceptionValue0 = document.getElementById('perceptionValue0').value;
-let intelligenceValue0 = document.getElementById('intelligenceValue0').value;
-let healthValue0 = document.getElementById('healthValue0').value;
-let damageValue0 = document.getElementById('damageValue0').value;
-let ARValue0 = document.getElementById('ARValue0').value;
-
-
-
-strengthValue1 = document.getElementById('strengthValue1').value;
-agilityValue1 = document.getElementById('agilityValue1').value;
-combatTrainingValue1 = document.getElementById('combatTrainingValue1').value;
-charismaValue1 = document.getElementById('charismaValue1').value;
-perceptionValue1 = document.getElementById('perceptionValue1').value;
-intelligenceValue1 = document.getElementById('intelligenceValue1').value;
-healthValue1 = document.getElementById('healthValue1').value;
-damageValue1 = document.getElementById('damageValue1').value;
- ARValue1 = document.getElementById('ARValue1').value;
-
-
+function returnStat(stat) {
+   return document.getElementById(stat).value;
+}
 
 function lightAttackFunction() {
-   console.log(document.getElementById('ARValue0').value);
+   if (role0.value === "actor") {
+      var attacker = '0';
+      var defender = '1';
+   } else {
+      var attacker = '1';
+      var defender = '0';
+   }
+
+let attackerMod = Number(returnStat(('agilityValue' + attacker))) + Number(returnStat(('combatTrainingValue' + attacker)));
+let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat(('combatTrainingValue' + defender)));
+
+let attackResult = attackerMod - defenderMod;
+
+if (attackResult > 0) {
+   document.getElementById('commentBox').textContent = 'Attack is successful, char' + (Number(defender) + 1) + ' suffers ' + Number(returnStat(('damageValue' + attacker))) + ' damage';
+   //Alter defender health
+} else {
+   document.getElementById('commentBox').textContent = 'Attack unsuccessful, char' + (Number(defender) + 1) + ' may respond';
+}
+
+console.log(attackResult);
 };
 
+
 function heavyAttackFunction() {
-   console.log('Heavy Attack Function');
+   if (role0.value === "actor") {
+      var attacker = '0';
+      var defender = '1';
+   } else {
+      var attacker = '1';
+      var defender = '0';
+   }
+
+let attackerMod = Number(returnStat(('strengthValue' + attacker))) + Number(returnStat(('combatTrainingValue' + attacker)));
+let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat(('combatTrainingValue' + defender)));
+
+let attackResult = attackerMod - defenderMod;
+
+if (attackResult > 0) {
+   document.getElementById('commentBox').textContent = 'Attack is successful, char' + (Number(defender) + 1) + ' suffers ' + Number(returnStat(('damageValue' + attacker))) + ' damage';
+   //Alter defender health
+} else {
+   document.getElementById('commentBox').textContent = 'Attack unsuccessful, char' + (Number(defender) + 1) + ' may respond';
+}
+
+console.log(attackResult);
 };
 
 
@@ -60,24 +76,15 @@ function main(calculationChoice) {
    }
 };
 
-
-
 function onCalculateClick() {
+
    const calculateButton = document.getElementById('calculateButton');
    calculateButton.addEventListener("click", function () {
 
    calculationChoice = document.getElementById('calculationOptions')
       main(calculationChoice.value)
 });
-
 }
-
-
-
-
-
-
-
 
 onCalculateClick();
 
