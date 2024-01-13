@@ -31,10 +31,15 @@ let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat
 let attackResult = attackerMod - defenderMod;
 
 if (attackResult > 0) {
-   document.getElementById('commentBox').textContent = 'Attack is successful, char' + (Number(defender) + 1) + ' suffers ' + Number(returnStat(('damageValue' + attacker))) + ' damage';
-   //Alter defender health
+   document.getElementById('healthValue' + defender).value -= Number(returnStat(('damageValue' + attacker)));
+   if (document.getElementById('healthValue' + defender).value < 1) {
+      document.getElementById('commentBox').textContent = 'Attack successful, character ' + (Number(defender) + 1) + ' is dead'
+
+   } else {
+   document.getElementById('commentBox').textContent = 'Attack is successful, character ' + (Number(defender) + 1) + ' suffers ' + Number(returnStat(('damageValue' + attacker))) + ' damage';
+   }
 } else {
-   document.getElementById('commentBox').textContent = 'Attack unsuccessful, char' + (Number(defender) + 1) + ' may respond';
+   document.getElementById('commentBox').textContent = 'Attack unsuccessful, character ' + (Number(defender) + 1) + ' may respond';
 }
 
 console.log(attackResult);
@@ -56,15 +61,19 @@ let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat
 let attackResult = attackerMod - defenderMod;
 
 if (attackResult > 0) {
-   document.getElementById('commentBox').textContent = 'Attack is successful, char' + (Number(defender) + 1) + ' suffers ' + Number(returnStat(('damageValue' + attacker))) + ' damage';
-   //Alter defender health
+   document.getElementById('healthValue' + defender).value -= Number(returnStat(('damageValue' + attacker)));
+   if (document.getElementById('healthValue' + defender).value < 1) {
+      document.getElementById('commentBox').textContent = 'Attack successful, character ' + (Number(defender) + 1) + ' is dead'
+
+   } else {
+   document.getElementById('commentBox').textContent = 'Attack is successful, character ' + (Number(defender) + 1) + ' suffers ' + Number(returnStat(('damageValue' + attacker))) + ' damage';
+   }
 } else {
-   document.getElementById('commentBox').textContent = 'Attack unsuccessful, char' + (Number(defender) + 1) + ' may respond';
+   document.getElementById('commentBox').textContent = 'Attack unsuccessful, character ' + (Number(defender) + 1) + ' may respond';
 }
 
 console.log(attackResult);
 };
-
 
 function main(calculationChoice) {
    if (calculationChoice === 'lightAttack') {
@@ -90,3 +99,4 @@ onCalculateClick();
 
 role0.addEventListener("change", () => toggleRole(role0, role1));
 role1.addEventListener("change", () => toggleRole(role1, role0));
+
