@@ -25,14 +25,14 @@ function lightAttackFunction() {
       var defender = '0';
    }
 
-let attackerMod = Number(returnStat(('agilityValue' + attacker))) + Number(returnStat(('combatTrainingValue' + attacker)));
-let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat(('combatTrainingValue' + defender)));
+let attackerMod = (Number(returnStat(('agilityValue' + attacker))) + Number(returnStat(('combatTrainingValue' + attacker)))) * (Math.random() * 1 + 0.5);
+let defenderMod = (Number(returnStat(('ARValue' + defender))) + Number(returnStat(('combatTrainingValue' + defender)))) * (Math.random() * 1 + 0.5);
 
 let attackResult = attackerMod - defenderMod;
 
 if (attackResult > 0) {
    document.getElementById('healthValue' + defender).value -= Number(returnStat(('damageValue' + attacker)));
-   if (document.getElementById('healthValue' + defender).value < 1) {
+   if (document.getElementById('healthValue' + defender).value <= 0) {
       document.getElementById('commentBox').textContent = 'Attack successful, character ' + (Number(defender) + 1) + ' is dead'
 
    } else {
@@ -55,14 +55,14 @@ function heavyAttackFunction() {
       var defender = '0';
    }
 
-let attackerMod = Number(returnStat(('strengthValue' + attacker))) + Number(returnStat(('combatTrainingValue' + attacker)));
-let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat(('combatTrainingValue' + defender)));
+let attackerMod = Number(returnStat(('strengthValue' + attacker))) + Number(returnStat(('combatTrainingValue' + attacker))) * (Math.random() * 1 + 0.5);
+let defenderMod = Number(returnStat(('ARValue' + defender))) + Number(returnStat(('combatTrainingValue' + defender))) * (Math.random() * 1 + 0.5);
 
 let attackResult = attackerMod - defenderMod;
 
 if (attackResult > 0) {
    document.getElementById('healthValue' + defender).value -= Number(returnStat(('damageValue' + attacker)));
-   if (document.getElementById('healthValue' + defender).value < 1) {
+   if (document.getElementById('healthValue' + defender).value <= 0) {
       document.getElementById('commentBox').textContent = 'Attack successful, character ' + (Number(defender) + 1) + ' is dead'
 
    } else {
@@ -99,4 +99,5 @@ onCalculateClick();
 
 role0.addEventListener("change", () => toggleRole(role0, role1));
 role1.addEventListener("change", () => toggleRole(role1, role0));
+
 
